@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project14-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project14-app
+  template:
+    metadata:
+      labels:
+        app: project14-app
+    spec:
+      containers:
+      - name: project14-app
+        image: 590507089733.dkr.ecr.us-east-1.amazonaws.com/project-13-ecr:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project14-service
+spec:
+  selector:
+    app: project14-app
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
